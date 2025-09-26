@@ -1,0 +1,31 @@
+name: "🐛 Bug Report"
+description: "버그 발생 시 작성해주세요."
+title: "[Bug] " # 기본 제목 템플릿
+labels: [ "bug" ]
+body:
+  - type: textarea
+    attributes:
+      label: "⚠️ 버그 설명"
+      description: "어떤 문제가 발생했는지 자세히 설명해주세요."
+      placeholder: "어떤 동작을 기대했는데, 실제로는 어떻게 동작했나요?"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "🛠️ 재현 방법"
+      description: "버그를 재현하는 방법을 단계별로 작성해주세요."
+      placeholder: |
+        1. 로그인 후 특정 페이지 이동
+        2. 버튼 클릭
+        3. 오류 발생
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: "💻 환경 정보"
+      description: "어떤 환경에서 발생했나요?"
+      placeholder: "예: macOS 14.3, Chrome 120.0"
+
+  -

@@ -1,0 +1,30 @@
+name: 🔒 Close Issues on PR Merge
+
+on:
+  workflow_call:
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract PR body
+        run: |
+          echo "PR_BODY<<EOF" >> $GITHUB_ENV
+          echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Close issues mentioned in PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = process.env.PR_BODY;
+            const issues = [...body.matchAll(/#(\d+)/g)].map(m => parseInt(m[1]));
+            for (const number of issues) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                state: "closed"
+              });
+              console.log(`✅ Closed issue #${number}`);
+            }

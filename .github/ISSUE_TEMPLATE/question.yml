@@ -1,0 +1,18 @@
+name: "❓ Question"
+description: "질문이 있나요? 여기에 작성해주세요!"
+title: "[Question] " # 기본 제목 템플릿
+labels: [ "question" ]
+body:
+  - type: textarea
+    attributes:
+      label: "💡 질문 내용"
+      description: "궁금한 내용을 자세히 설명해주세요."
+      placeholder: "어떤 부분이 이해되지 않나요?"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "📌 관련 코드 (선택 사항)"
+      description: "관련된 코드가 있다면 첨부해주세요."
+      placeholder: "관련 코드 스니펫을 복사해서 붙여넣어 주세요."

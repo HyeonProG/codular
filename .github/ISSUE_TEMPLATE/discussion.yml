@@ -1,0 +1,25 @@
+name: "💬 Discussion"
+description: "프로젝트 관련 논의를 위한 이슈"
+title: "[Discussion] " # 기본 제목 템플릿
+labels: [ "discussion" ]
+body:
+  - type: textarea
+    attributes:
+      label: "🗣️ 논의 주제"
+      description: "어떤 주제에 대해 논의하고 싶은가요?"
+      placeholder: "논의할 주제를 설명해주세요."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "🔎 배경 및 필요성"
+      description: "이 논의가 필요한 이유를 설명해주세요."
+      placeholder: "왜 이 논의가 필요한지 설명해주세요."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "💭 의견 및 제안"
+      description: "현재 생각하는 해결책이나 아이디어가 있나요?"

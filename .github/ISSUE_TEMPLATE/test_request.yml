@@ -1,0 +1,20 @@
+name: "🧪 Test Request"
+description: "테스트 관련 요청"
+title: "[Test] " # 기본 제목 템플릿
+labels: [ "test" ]
+body:
+  - type: textarea
+    attributes:
+      label: "📄 테스트 대상"
+      description: "테스트할 기능을 설명해주세요."
+      placeholder: "예: 유저 로그인 기능"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "✅ 기대 결과"
+      description: "테스트가 성공했을 때 기대되는 결과는?"
+      placeholder: "예: 올바른 인증 토큰이 반환됨"
+    validations:
+      required: true

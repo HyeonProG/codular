@@ -1,0 +1,34 @@
+name: "📌 Task"
+description: "개발해야 할 작업을 정리해주세요."
+title: "[Task] " # 기본 제목 템플릿
+labels: [ "task" ]
+body:
+  - type: textarea
+    attributes:
+      label: "📄 작업 내용"
+      description: "구현해야 하는 기능이나 작업 내용을 설명해주세요."
+      placeholder: "이 작업이 필요한 이유와 목표를 설명해주세요."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "✅ 체크리스트"
+      description: "할 일을 체크박스로 나열해주세요."
+      placeholder: |
+        - [ ] API 개발
+        - [ ] 프론트엔드 UI 구성
+        - [ ] 테스트 코드 작성
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: "🚀 우선순위"
+      description: "이 작업의 중요도를 선택해주세요."
+      options:
+        - "낮음"
+        - "보통"
+        - "높음"
+    validations:
+      required: true

@@ -1,0 +1,20 @@
+name: "📖 Documentation"
+description: "문서 관련 요청"
+title: "[Documentation] " # 기본 제목 템플릿
+labels: [ "documentation" ]
+body:
+  - type: textarea
+    attributes:
+      label: "📄 문서 수정 요청"
+      description: "어떤 문서가 수정되어야 하나요?"
+      placeholder: "예: README.md의 API 설명이 부족합니다."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "✅ 기대 결과"
+      description: "어떤 내용이 추가되었으면 하나요?"
+      placeholder: "예: 각 API의 요청 및 응답 예제"
+    validations:
+      required: true

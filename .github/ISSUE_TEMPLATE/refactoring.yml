@@ -1,0 +1,26 @@
+name: "♻️ Refactoring"
+description: "코드 개선 및 최적화 작업"
+title: "[Refactor] " # 기본 제목 템플릿
+labels: [ "refactor" ]
+body:
+  - type: textarea
+    attributes:
+      label: "📄 리팩토링 내용"
+      description: "리팩토링할 코드를 설명해주세요."
+      placeholder: "어떤 부분을 개선할 계획인가요?"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "✅ 개선 목표"
+      description: "이 리팩토링의 목표는 무엇인가요?"
+      placeholder: "성능 향상, 유지보수성 증가 등"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "⚠️ 예상되는 영향"
+      description: "이 리팩토링이 시스템에 미칠 영향을 설명해주세요."
+      placeholder: "버그 발생 가능성, 관련 코드 수정 필요 여부 등"
