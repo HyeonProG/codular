@@ -1,4 +1,4 @@
-package com.codula.config;
+package com.codular.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
