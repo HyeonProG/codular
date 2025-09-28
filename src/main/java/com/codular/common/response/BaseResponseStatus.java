@@ -25,9 +25,14 @@ public enum BaseResponseStatus {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, 500,  "서버 내부 오류입니다."),
 
     // Custom Errors
+
+    // jwt
     EXPIRED_JWT(HttpStatus.UNAUTHORIZED, false, 401, "만료된 JWT 토큰입니다."),
     BAD_JWT(HttpStatus.BAD_REQUEST, false, 400, "잘못된 JWT 토큰입니다."),
-    FAILED_AUTHENTICATION_JWT_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "JWT 토큰 서명 검증에 실패하였습니다.");
+    FAILED_AUTHENTICATION_JWT_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "JWT 토큰 서명 검증에 실패하였습니다."),
+
+    // user
+    ALREADY_EXIST_EMAIL(HttpStatus.CONFLICT, false, 409, "이미 존재하는 이메일입니다.");
 
 
     private final HttpStatusCode httpStatusCode;
