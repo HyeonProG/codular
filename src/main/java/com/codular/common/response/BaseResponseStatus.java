@@ -30,9 +30,15 @@ public enum BaseResponseStatus {
     EXPIRED_JWT(HttpStatus.UNAUTHORIZED, false, 401, "만료된 JWT 토큰입니다."),
     BAD_JWT(HttpStatus.BAD_REQUEST, false, 400, "잘못된 JWT 토큰입니다."),
     FAILED_AUTHENTICATION_JWT_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "JWT 토큰 서명 검증에 실패하였습니다."),
+    NO_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "리프레시 토큰이 없습니다."),
+    UNAUTHORIZED_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "리프레시 토큰이 유효하지 않습니다."),
+    NO_MATCH_TOKEN(HttpStatus.UNAUTHORIZED, false, 401, "토큰과 사용자 요청 정보가 일치하지 않습니다."),
+    NO_HEADER(HttpStatus.UNAUTHORIZED, false, 401, "헤더가 존재하지 않습니다."),
 
     // user
-    ALREADY_EXIST_EMAIL(HttpStatus.CONFLICT, false, 409, "이미 존재하는 이메일입니다.");
+    ALREADY_EXIST_EMAIL(HttpStatus.CONFLICT, false, 409, "이미 존재하는 이메일입니다."),
+    NO_MATCH_EMAIL_OR_PASSWORD(HttpStatus.BAD_REQUEST, false, 400, "이메일 또는 비밀번호가 일치하지 않습니다."),
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND, false, 404, "사용자를 찾을 수 없습니다.");
 
 
     private final HttpStatusCode httpStatusCode;

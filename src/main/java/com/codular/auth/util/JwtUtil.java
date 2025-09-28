@@ -6,6 +6,7 @@ import com.codular.common.response.BaseResponseStatus;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -21,9 +22,11 @@ public class JwtUtil {
     private final long skewSec;
 
     private final Key accessKey;
+    @Getter
     private final long accessExpMin;
 
     private final Key refreshKey;
+    @Getter
     private final long refreshExpDays;
 
     public JwtUtil(JwtProperties props) {
@@ -52,11 +55,13 @@ public class JwtUtil {
     }
 
     // Refresh Token 발급
-    public String issueRefresh(Long userId) {
+    public String issueRefresh(Long userId, String email, String role) {
         Instant now = Instant.now();
         return Jwts.builder()
                 .setIssuer(issuer) // 토큰 발급자
                 .setSubject(String.valueOf(userId)) // 사용자 식별
+                .claim("email", email)
+                .claim("role", role) // 권한
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(now.plus(refreshExpDays, ChronoUnit.DAYS)))
                 .signWith(refreshKey, SignatureAlgorithm.HS256)
