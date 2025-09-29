@@ -63,12 +63,3 @@
     <a href="/posts/new" class="btn btn-primary px-4 py-2 mt-3 mt-md-0">보일러플레이트 업로드</a>
   </div>
 </section>
-<footer class="border-top py-4">
-  <div class="container d-flex justify-content-between flex-wrap gap-2 small text-muted">
-    <span>© Codular</span>
-    <div class="d-flex gap-3">
-      <a class="link-secondary" href="#">이용약관</a>
-      <a class="link-secondary" href="#">개인정보처리방침</a>
-    </div>
-  </div>
-</footer>

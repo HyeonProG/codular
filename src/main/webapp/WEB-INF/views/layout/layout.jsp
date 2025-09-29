@@ -16,6 +16,7 @@
     <main class="container py-4">
         <jsp:include page="${param.content}"/>
     </main>
+    <jsp:include page="/WEB-INF/views/layout/_footer.jsp"/>
 
     <script>
         // 토큰 유틸, 로그아웃
