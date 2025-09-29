@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/error", "/error/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().permitAll()) // prod 환경에서는 .authenticated() 으로 변경 필요
                 .csrf(AbstractHttpConfigurer::disable)

@@ -1,6 +1,5 @@
 package com.codular.domain.auth.controller;
 
-import com.codular.common.exception.BaseException;
 import com.codular.common.response.BaseResponseEntity;
 import com.codular.common.response.BaseResponseStatus;
 import com.codular.domain.auth.dto.request.TokenReissueRequestDto;
