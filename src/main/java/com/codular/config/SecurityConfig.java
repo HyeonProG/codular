@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers(
                                 "/api/v1/auth/sign-in",
+                                "/api/v1/auth/sign-up",
                                 "/api/v1/auth/refresh",
                                 "/api/v1/auth/logout"))
                 // cors

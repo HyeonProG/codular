@@ -4,6 +4,7 @@ import com.codular.common.exception.BaseException;
 import com.codular.common.response.BaseResponseEntity;
 import com.codular.common.response.BaseResponseStatus;
 import com.codular.domain.auth.dto.request.UserSignInRequestDto;
+import com.codular.domain.auth.dto.request.UserSignUpRequestDto;
 import com.codular.domain.auth.dto.response.UserSignInResponseDto;
 import com.codular.domain.auth.service.AuthService;
 import com.codular.domain.auth.util.AuthCookieManager;
@@ -30,6 +31,13 @@ public class AuthApiController {
     private final AuthService authService;
     private final AuthCookieManager authCookieManager;
     private final JwtUtil jwtUtil;
+
+    @Operation(summary = "회원가입 API", description = "이메일/닉네임/비밀번호로 회원가입 성공 시 로그인 페이지로 이동", tags = {"Auth-Service"})
+    @PostMapping("/sign-up")
+    public BaseResponseEntity<?> signUp(@Valid @RequestBody UserSignUpRequestDto userSignUpRequestDto) {
+        authService.signUp(userSignUpRequestDto);
+        return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS, Map.of("redirectUri", "/auth/sign-in"));
+    }
 
     @Operation(summary = "로그인 API", description = "이메일, 비밀번호를 입력받아 AccessToken, RefreshToken 발급", tags = {"Auth-Service"})
     @PostMapping("/sign-in")

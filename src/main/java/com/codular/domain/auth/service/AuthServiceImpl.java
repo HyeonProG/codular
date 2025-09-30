@@ -3,6 +3,7 @@ package com.codular.domain.auth.service;
 import com.codular.common.exception.BaseException;
 import com.codular.common.response.BaseResponseStatus;
 import com.codular.domain.auth.dto.request.UserSignInRequestDto;
+import com.codular.domain.auth.dto.request.UserSignUpRequestDto;
 import com.codular.domain.auth.dto.response.UserSignInResponseDto;
 import com.codular.domain.auth.repository.RefreshTokenRepository;
 import com.codular.domain.auth.util.JwtUtil;
@@ -13,6 +14,7 @@ import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 
@@ -24,6 +26,25 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final RefreshTokenRepository refreshTokenRepository;
+
+    @Override
+    @Transactional
+    public void signUp(UserSignUpRequestDto userSignUpRequestDto) {
+        if (userRepository.existsByEmail(userSignUpRequestDto.getEmail())) {
+            throw new BaseException(BaseResponseStatus.ALREADY_EXIST_EMAIL);
+        }
+        if (userRepository.existsByNickname(userSignUpRequestDto.getNickname())) {
+            throw new BaseException(BaseResponseStatus.ALREADY_EXIST_NICKNAME);
+        }
+
+        User user = User.builder()
+                .email(userSignUpRequestDto.getEmail())
+                .nickname(userSignUpRequestDto.getNickname())
+                .password(passwordEncoder.encode(userSignUpRequestDto.getPassword()))
+                .build();
+
+        userRepository.save(user);
+    }
 
     @Override
     public UserSignInResponseDto signIn(UserSignInRequestDto userSignInRequestDto) {

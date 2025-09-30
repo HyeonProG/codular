@@ -1,9 +1,15 @@
 package com.codular.domain.auth.service;
 
 import com.codular.domain.auth.dto.request.UserSignInRequestDto;
+import com.codular.domain.auth.dto.request.UserSignUpRequestDto;
 import com.codular.domain.auth.dto.response.UserSignInResponseDto;
 
 public interface AuthService {
+
+    /*
+     * 회원가입
+     */
+    void signUp(UserSignUpRequestDto userSignUpRequestDto);
 
     /*
      * 로그인
