@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserSignInResponseDto {
 
+    private Long userId;
     private String accessToken;
     private String refreshToken;
 
     @Builder
-    public UserSignInResponseDto(String accessToken, String refreshToken) {
+    public UserSignInResponseDto(Long userId, String accessToken, String refreshToken) {
+        this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }

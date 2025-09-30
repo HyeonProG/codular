@@ -1,37 +1,38 @@
 package com.codular.domain.auth.repository;
 
-import com.codular.common.util.HashUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
+import java.time.Duration;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @Repository
 @RequiredArgsConstructor
 public class RedisRefreshTokenRepository implements RefreshTokenRepository {
 
-    private final StringRedisTemplate redis;
+    private static final String PREFIX = "auth:rt:";
+    private final StringRedisTemplate redisTemplate;
 
     private String key(Long userId) {
-        return "rt:" + userId;
+        return PREFIX + userId;
     }
 
     @Override
-    public void save(Long userId, String token, long ttlSeconds) {
-        String hash = HashUtil.sha256(token);
-        redis.opsForValue().set(key(userId), hash, ttlSeconds, TimeUnit.SECONDS);
+    public void save(Long userId, String refreshToken, long ttlSeconds) {
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        ops.set(key(userId), refreshToken, Duration.ofSeconds(ttlSeconds));
     }
 
     @Override
     public Optional<String> find(Long userId) {
-        return Optional.ofNullable(redis.opsForValue().get(key(userId)));
+        return Optional.ofNullable(redisTemplate.opsForValue().get(key(userId)));
     }
 
     @Override
     public void delete(Long userId) {
-        redis.delete(key(userId));
+        redisTemplate.delete(key(userId));
     }
 
 }

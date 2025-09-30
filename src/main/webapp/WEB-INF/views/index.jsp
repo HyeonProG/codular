@@ -14,13 +14,11 @@
   <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
   <main class="container py-4">
-    <!-- (기존 _index_content.jsp 내용 그대로) -->
     <section class="py-5 text-center">
       <h1 class="display-4 fw-bold mb-3">Codular</h1>
       <p class="lead text-muted mb-4">개발자가 자주 쓰는 Boilerplate 코드를 모아 공유하는 커뮤니티 플랫폼</p>
       <div class="d-flex gap-3 justify-content-center">
         <a href="<c:url value='/posts'/>" class="btn btn-primary btn-lg px-4">보일러플레이트 보러가기</a>
-        <a href="<c:url value='/auth/sign-in'/>" class="btn btn-outline-secondary btn-lg px-4">로그인</a>
       </div>
     </section>
 

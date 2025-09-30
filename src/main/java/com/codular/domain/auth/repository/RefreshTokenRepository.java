@@ -5,7 +5,7 @@ import java.util.Optional;
 public interface RefreshTokenRepository {
 
     // 해시 저장 + TTL
-    void save(Long userId, String token, long ttlSeconds);
+    void save(Long userId, String refreshToken, long ttlSeconds);
 
     // 저장된 해시 반환
     Optional<String> find(Long userId);
