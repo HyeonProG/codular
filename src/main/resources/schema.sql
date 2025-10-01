@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS comment (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     post_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
-    parant_id BIGINT NULL,
+    parent_id BIGINT NULL,
     root_id BIGINT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -103,9 +103,9 @@ CREATE TABLE IF NOT EXISTS comment (
 
     CONSTRAINT fk_comment_post FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE,
     CONSTRAINT fk_comment_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
-    CONSTRAINT fk_comment_parent FOREIGN KEY (parant_id) REFERENCES comment(id) ON DELETE CASCADE,
+    CONSTRAINT fk_comment_parent FOREIGN KEY (parent_id) REFERENCES comment(id) ON DELETE CASCADE,
 
     KEY idx_comment_post (post_id, created_at DESC),
-    KEY idx_comment_parant_created (parant_id, created_at DESC),
+    KEY idx_comment_parent_created (parent_id, created_at DESC),
     KEY idx_comment_root_created (root_id, created_at DESC)
 );

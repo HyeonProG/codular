@@ -1,4 +1,4 @@
-package com.codular.auth.config;
+package com.codular.domain.auth.config;
 
 import lombok.Getter;
 import lombok.Setter;
