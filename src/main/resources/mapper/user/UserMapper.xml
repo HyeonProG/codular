@@ -43,4 +43,8 @@
     <select id="findNicknameById" parameterType="long" resultType="string">
         SELECT nickname FROM user WHERE id = #{id}
     </select>
+    <!--  비밀번호 업데이트 -->
+    <update id="updatePassword">
+        UPDATE user SET password = #{password} WHERE id = #{id}
+    </update>
 </mapper>

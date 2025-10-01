@@ -37,4 +37,8 @@ public class UserRepository {
         return userMapper.findNicknameById(userId);
     }
 
+    public void updatePassword(Long id, String password) {
+        userMapper.updatePassword(id, password);
+    }
+
 }

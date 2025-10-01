@@ -28,4 +28,6 @@ public interface UserMapper {
 
     String findNicknameById(Long id);
 
+    void updatePassword(Long id, String password);
+
 }

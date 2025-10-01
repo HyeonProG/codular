@@ -20,6 +20,10 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public void changePassword(String encodedPassword) {
+        this.password = encodedPassword;
+    }
+
     @Builder
     public User(Long id, String email, String password, String nickname, UserRole role) {
         this.id = id;
