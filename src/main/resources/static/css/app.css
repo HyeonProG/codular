@@ -1,0 +1,41 @@
+/* 페이지 전체를 세로 플렉스 레이아웃로 -> 푸터 바닥 고정 */
+html, body { height: 100%; }
+body.page--simple {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 본문이 남는 공간을 채우며 가운데 정렬 */
+main.page-main--center {
+  flex: 1 0 auto;                 /* 남는 높이를 차지 */
+  display: flex;
+  align-items: center;            /* 수직 중앙 */
+  justify-content: center;        /* 수평 중앙 */
+  padding: 3rem 1rem;             /* 적당한 내부 여백 */
+}
+
+/* 푸터는 자동으로 아래로 밀림 */
+footer { margin-top: auto; }
+
+/* 전체 톤: 화이트 + 다크 텍스트 */
+body { background: #fff; color: #212529; }
+
+/* 카드/버튼 살짝 강화 */
+.card { border: 1px solid #eee; border-radius: .75rem; }
+.card .card-title { letter-spacing: .3px; }
+.btn-primary { box-shadow: 0 6px 20px rgba(46,103,255,.25); }
+.border { border-color: #eee !important; }
+
+/* 네비게이션 바 간격/로고 정렬 */
+.navbar { padding-top: 0 !important; padding-bottom: 0 !important; }
+.navbar-brand img { height: 72px; width: auto; margin-right: 8px; }
+
+/* 히어로 섹션 여백 */
+section.py-5.text-center { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+
+/* 헤더 (white theme) */
+.navbar.border-bottom { border-color: #e9ecef !important; }
+.navbar-brand .brand-logo { height: 72px; width: auto; }
+.navbar .nav-link { color: #212529; }
+.navbar .nav-link:hover { color: #0d6efd; }
