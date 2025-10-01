@@ -73,7 +73,6 @@ public class AuthApiController {
 
         Long userId = (Long) authentication.getPrincipal();
         authService.logout(userId);
-
         authCookieManager.clear(response);
 
         return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);

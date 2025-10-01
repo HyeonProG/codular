@@ -14,8 +14,18 @@ public interface UserMapper {
 
     Optional<User> findByEmail(String email);
 
-    boolean existsByEmail(String email);
+    int countByEmail(String email);
 
-    boolean existsByNickname(String nickname);
+    default boolean existsByEmail(String email) {
+        return countByEmail(email) > 0;
+    }
+
+    int countByNickname(String nickname);
+
+    default boolean existsByNickname(String nickname) {
+        return countByNickname(nickname) > 0;
+    }
+
+    String findNicknameById(Long id);
 
 }

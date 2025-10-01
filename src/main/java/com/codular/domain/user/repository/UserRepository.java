@@ -33,4 +33,8 @@ public class UserRepository {
         return userMapper.existsByNickname(nickname);
     }
 
+    public String findNicknameById(Long userId) {
+        return userMapper.findNicknameById(userId);
+    }
+
 }

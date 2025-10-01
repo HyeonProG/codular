@@ -58,7 +58,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String uri = request.getRequestURI();
-        return PM.match("/api/v1/auth/**", uri) // 회원가입/로그인/재발급
+        return PM.match("/api/v1/auth/sign-in", uri)
+                || PM.match("/api/v1/auth/sign-up", uri)
+                || PM.match("/api/v1/auth/reissue", uri)
                 || PM.match("/api/v1/test/**", uri) // 테스트용 공개 엔드포인트
                 || PM.match("/swagger-ui/**", uri) // Swagger UI
                 || PM.match("/v3/api-docs/**", uri); // OpenAPI

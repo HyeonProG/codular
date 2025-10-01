@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.codular.domain.user.User">
+<mapper namespace="com.codular.domain.user.mapper.UserMapper">
     <!--  User 테이블 매핑  -->
     <resultMap id="userResultMap" type="com.codular.domain.user.User">
         <id property="id" column="id" />
@@ -29,8 +29,18 @@
         SELECT * FROM user WHERE id = #{id}
     </select>
 
-    <!--  닉네임으로 회원 조회  -->
-    <select id="findByNickname" parameterType="string" resultMap="userResultMap">
-        SELECT * FROM user WHERE nickname = #{nickname}
+    <!--  이메일로 회원 존재 확인  -->
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT COUNT(1) FROM user WHERE email = #{email}
+    </select>
+
+    <!--  닉네임으로 회원 존재 확인  -->
+    <select id="countByNickname" parameterType="string" resultType="int">
+        SELECT COUNT(1) FROM user WHERE nickname = #{nickname}
+    </select>
+
+    <!--  id로 닉네임 조회  -->
+    <select id="findNicknameById" parameterType="long" resultType="string">
+        SELECT nickname FROM user WHERE id = #{id}
     </select>
 </mapper>
