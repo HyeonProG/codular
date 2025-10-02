@@ -15,13 +15,16 @@
     `;
   }
 
-  // nickname 안전 삽입: innerHTML로 직접 넣지 않고 textContent 사용
-  function renderDropdown(nickname) {
+  // nickname, profileImageUrl 안전 삽입: innerHTML로 직접 넣지 않고 textContent 사용
+  function renderDropdown(nickname, profileImageUrl) {
     if (!$auth) return;
     $auth.innerHTML = `
       <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"></button>
+        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="${profileImageUrl || '/images/default-profile.jpeg'}" alt="Profile" class="rounded-circle me-2" style="width:24px; height:24px; object-fit:cover;">
+          <span class="nickname-text"></span>
+        </button>
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="${BASE}/mypage">마이페이지</a></li>
           <li><hr class="dropdown-divider"></li>
@@ -29,9 +32,9 @@
         </ul>
       </div>
     `;
-    // XSS 방지: 버튼 텍스트는 textContent로 주입
-    const btn = $auth.querySelector('.dropdown-toggle');
-    if (btn) btn.textContent = nickname || '회원';
+    // XSS 방지: 닉네임은 textContent로 주입
+    const nicknameSpan = $auth.querySelector('.nickname-text');
+    if (nicknameSpan) nicknameSpan.textContent = nickname || '회원';
   }
 
   async function getMe() {
@@ -47,7 +50,7 @@
     if (!res.ok) return null;
 
     const json = await res.json().catch(() => null);
-    return (json && json.isSuccess && json.result) ? json.result : null; // {nickname}
+    return (json && json.isSuccess && json.result) ? json.result : null; // {nickname, profileImageUrl}
   }
 
   let loggingOut = false; // 중복 요청 방지
@@ -85,7 +88,7 @@
     if (!$auth) return;
     try {
       const me = await getMe();
-      if (me) renderDropdown(me.nickname);
+      if (me) renderDropdown(me.nickname, me.profileImageUrl);
       else    renderLoggedOut();
     } catch (e) {
       log('init error', e);

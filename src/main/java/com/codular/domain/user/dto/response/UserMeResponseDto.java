@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserMeResponseDto {
 
     private String nickname;
+    private String profileUrl;
 
 }

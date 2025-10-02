@@ -8,6 +8,7 @@
         <id property="id" column="id" />
         <result property="email" column="email" />
         <result property="nickname" column="nickname" />
+        <result property="profileUrl" column="profileUrl"/>
         <result property="password" column="password" />
         <result property="createdAt" column="created_at" />
         <result property="updatedAt" column="updated_at" />
