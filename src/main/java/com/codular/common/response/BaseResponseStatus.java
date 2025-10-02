@@ -39,7 +39,8 @@ public enum BaseResponseStatus {
     ALREADY_EXIST_EMAIL(HttpStatus.CONFLICT, false, 409, "이미 존재하는 이메일입니다."),
     ALREADY_EXIST_NICKNAME(HttpStatus.CONFLICT, false, 409, "이미 존재하는 닉네임입니다."),
     NO_MATCH_EMAIL_OR_PASSWORD(HttpStatus.BAD_REQUEST, false, 400, "이메일 또는 비밀번호가 일치하지 않습니다."),
-    NOT_FOUND_USER(HttpStatus.NOT_FOUND, false, 404, "사용자를 찾을 수 없습니다.");
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND, false, 404, "사용자를 찾을 수 없습니다."),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, false, 400, "비밀번호가 일치하지 않습니다.");
 
 
     private final HttpStatusCode httpStatusCode;

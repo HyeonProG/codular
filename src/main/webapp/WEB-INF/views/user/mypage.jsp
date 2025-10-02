@@ -24,28 +24,7 @@
     <div class="row g-4">
       <!-- 좌측 사이드 -->
       <aside class="col-12 col-md-3">
-        <div class="sidebar">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <c:choose>
-              <c:when test="${not empty view.profileImageUrl}">
-                <img src="${view.profileImageUrl}" alt="프로필" class="avatar-xl border" />
-              </c:when>
-              <c:otherwise>
-                <img src="${pageContext.request.contextPath}/images/default-profile.jpeg" alt="프로필" class="avatar-xl border" />
-              </c:otherwise>
-            </c:choose>
-            <div>
-              <div class="fw-semibold">${view.nickname}</div>
-              <div class="text-muted small">${view.email}</div>
-            </div>
-          </div>
-
-          <div class="list-group">
-            <a href="${pageContext.request.contextPath}/mypage" class="list-group-item active">내 정보</a>
-            <a href="${pageContext.request.contextPath}/mypage/posts" class="list-group-item">내가 올린 게시글</a>
-            <a href="${pageContext.request.contextPath}/mypage/password" class="list-group-item">비밀번호 변경</a>
-          </div>
-        </div>
+        <jsp:include page="/WEB-INF/views/layout/mypage-sidebar.jsp"/>
       </aside>
 
       <!-- 우측 콘텐츠 -->

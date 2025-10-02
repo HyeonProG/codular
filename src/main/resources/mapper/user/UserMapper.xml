@@ -8,7 +8,7 @@
         <id property="id" column="id" />
         <result property="email" column="email" />
         <result property="nickname" column="nickname" />
-        <result property="profileUrl" column="profileUrl"/>
+        <result property="profileImageUrl" column="profileImageUrl"/>
         <result property="password" column="password" />
         <result property="createdAt" column="created_at" />
         <result property="updatedAt" column="updated_at" />
@@ -46,11 +46,11 @@
     </select>
     <!--  비밀번호 업데이트 -->
     <update id="updatePassword">
-        UPDATE user SET password = #{password} WHERE id = #{id}
+        UPDATE user SET password = #{password}, updated_at = NOW() WHERE id = #{id}
     </update>
 
     <!--  닉네임 업데이트  -->
     <update id="updateNickname">
-        UPDATE user SET nickname = #{nickname}, updated_at = NOW() where id = #{userId}
+        UPDATE user SET nickname = #{nickname}, updated_at = NOW() WHERE id = #{userId}
     </update>
 </mapper>

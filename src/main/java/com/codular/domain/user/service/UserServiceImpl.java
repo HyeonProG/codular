@@ -4,10 +4,12 @@ import com.codular.common.exception.BaseException;
 import com.codular.common.response.BaseResponseStatus;
 import com.codular.domain.user.User;
 import com.codular.domain.user.dto.request.UpdateNicknameRequestDto;
+import com.codular.domain.user.dto.request.UpdatePasswordRequestDto;
 import com.codular.domain.user.dto.response.UserMeResponseDto;
 import com.codular.domain.user.dto.response.UserMyPageResponseDto;
 import com.codular.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserMeResponseDto getMe(Long userId) {
@@ -53,5 +56,23 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.updateNickname(userId, newNickname);
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(Long userId, UpdatePasswordRequestDto updatePasswordRequestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_USER));
+
+        if (!passwordEncoder.matches(updatePasswordRequestDto.getCurrentPassword(), user.getPassword())) {
+            throw new BaseException(BaseResponseStatus.INVALID_PASSWORD);
+        }
+
+        if (!updatePasswordRequestDto.getNewPassword().equals(updatePasswordRequestDto.getConfirmPassword())) {
+            throw new BaseException(BaseResponseStatus.INVALID_PASSWORD);
+        }
+
+        user.setPassword(passwordEncoder.encode(updatePasswordRequestDto.getNewPassword()));
+        userRepository.updatePassword(userId, updatePasswordRequestDto.getNewPassword());
     }
 }

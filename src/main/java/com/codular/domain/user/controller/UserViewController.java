@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDateTime;
-
 @Controller
 @RequiredArgsConstructor
 public class UserViewController {
@@ -27,6 +25,19 @@ public class UserViewController {
 
         model.addAttribute("view", view);
         return "user/mypage";
+    }
+
+    @GetMapping("/mypage/password")
+    public String password(Model model, Authentication authentication) {
+        if (authentication == null || authentication.getPrincipal() == null) {
+            return "redirect:/auth/sign-in";
+        }
+
+        Long userId = (Long) authentication.getPrincipal();
+        UserMyPageResponseDto view = userService.getUserMyPage(userId);
+
+        model.addAttribute("view", view);
+        return "user/password-update";
     }
 
 }
