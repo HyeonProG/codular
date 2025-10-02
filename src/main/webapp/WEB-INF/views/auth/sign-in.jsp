@@ -34,7 +34,7 @@
         </div>
 
         <div class="d-flex justify-content-end mb-3">
-          <a href="/auth/reset-password" class="small text-muted">비밀번호 찾기</a>
+          <a href="/auth/password/forgot" class="small text-muted">비밀번호 찾기</a>
         </div>
 
         <button class="btn btn-primary w-100 py-2" type="submit">로그인</button>

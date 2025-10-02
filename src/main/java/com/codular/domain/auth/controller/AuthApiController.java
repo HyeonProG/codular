@@ -3,10 +3,13 @@ package com.codular.domain.auth.controller;
 import com.codular.common.exception.BaseException;
 import com.codular.common.response.BaseResponseEntity;
 import com.codular.common.response.BaseResponseStatus;
+import com.codular.domain.auth.dto.request.PasswordResetConfirmRequestDto;
+import com.codular.domain.auth.dto.request.PasswordResetRequestDto;
 import com.codular.domain.auth.dto.request.UserSignInRequestDto;
 import com.codular.domain.auth.dto.request.UserSignUpRequestDto;
 import com.codular.domain.auth.dto.response.UserSignInResponseDto;
 import com.codular.domain.auth.service.AuthService;
+import com.codular.domain.auth.service.PasswordResetService;
 import com.codular.domain.auth.util.AuthCookieManager;
 import com.codular.domain.auth.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.Duration;
 import java.util.Map;
@@ -29,6 +33,7 @@ import java.util.Map;
 public class AuthApiController {
 
     private final AuthService authService;
+    private final PasswordResetService passwordResetService;
     private final AuthCookieManager authCookieManager;
     private final JwtUtil jwtUtil;
 
@@ -75,6 +80,23 @@ public class AuthApiController {
         authService.logout(userId);
         authCookieManager.clear(response);
 
+        return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
+    }
+
+    @Operation(summary = "비밀번호 재설정 요청 API", description = "비밀번호 재설정 메일 요청", tags = {"Auth-Service"})
+    @PostMapping("/password/forgot")
+    public BaseResponseEntity<?> forgotPassword(@Valid @RequestBody PasswordResetRequestDto passwordResetRequestDto) {
+        String resetLinkBase = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/auth/password/reset")
+                .toUriString();
+        passwordResetService.requestResetPassword(passwordResetRequestDto.getEmail(), resetLinkBase);
+        return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
+    }
+
+    @Operation(summary = "비밀번호 재설정 API", description = "비밀번호 재설정", tags = {"Auth-Service"})
+    @PostMapping("/password/reset")
+    public BaseResponseEntity<?> resetPassword(@RequestBody PasswordResetConfirmRequestDto requestDto) {
+        passwordResetService.confirmResetPassword(requestDto.getEmail(), requestDto.getToken(), requestDto.getNewPassword());
         return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
     }
 
