@@ -48,4 +48,9 @@
     <update id="updatePassword">
         UPDATE user SET password = #{password} WHERE id = #{id}
     </update>
+
+    <!--  닉네임 업데이트  -->
+    <update id="updateNickname">
+        UPDATE user SET nickname = #{nickname}, updated_at = NOW() where id = #{userId}
+    </update>
 </mapper>

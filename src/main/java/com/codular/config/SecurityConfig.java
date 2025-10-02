@@ -40,22 +40,22 @@ public class SecurityConfig {
                 // 세션 미사용(JWT)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // CSRF 활성화
-                .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers(
-                                "/api/v1/auth/sign-in",
-                                "/api/v1/auth/sign-up",
-                                "/api/v1/auth/refresh",
-                                "/api/v1/auth/logout",
-                                "/api/v1/auth/password/forgot",
-                                "/api/v1/auth/password/reset"))
+                .csrf(AbstractHttpConfigurer::disable)
+//                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                        .ignoringRequestMatchers(
+//                                "/api/v1/auth/sign-in",
+//                                "/api/v1/auth/sign-up",
+//                                "/api/v1/auth/refresh",
+//                                "/api/v1/auth/logout",
+//                                "/api/v1/auth/password/forgot",
+//                                "/api/v1/auth/password/reset"))
                 // cors
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/", "/favicon.ico", "/css/**", "/js/**", "/images/**"
-                        , "swagger-ui/**", "/v3/api-docs/**", "/error", "/error/**"
-                        , "/auth/**", "api/v1/auth/**").permitAll()
+                        , "/swagger-ui/**", "/v3/api-docs/**", "/error", "/error/**"
+                        , "/auth/**", "/api/v1/auth/**").permitAll()
                         // 운영단계에서는 .authenticated()
                         .anyRequest().permitAll()
                 )

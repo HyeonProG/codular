@@ -33,8 +33,8 @@ public class UserRepository {
         return userMapper.existsByNickname(nickname);
     }
 
-    public String findNicknameById(Long userId) {
-        return userMapper.findNicknameById(userId);
+    public void updateNickname(Long userId, String nickname) {
+        userMapper.updateNickname(userId, nickname);
     }
 
     public void updatePassword(Long id, String password) {

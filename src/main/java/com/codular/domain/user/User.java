@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String password;
     private String nickname;
-    private String profileUrl;
+    private String profileImageUrl;
     private UserRole role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -26,12 +26,12 @@ public class User {
     }
 
     @Builder
-    public User(Long id, String email, String password, String nickname, String profileUrl, UserRole role) {
+    public User(Long id, String email, String password, String nickname, String profileImageUrl, UserRole role) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
-        this.profileUrl = profileUrl;
+        this.profileImageUrl = profileImageUrl;
         this.role = role;
     }
 

@@ -39,3 +39,19 @@ section.py-5.text-center { padding-top: 4rem !important; padding-bottom: 4rem !i
 .navbar-brand .brand-logo { height: 72px; width: auto; }
 .navbar .nav-link { color: #212529; }
 .navbar .nav-link:hover { color: #0d6efd; }
+
+/* 공통 페이지 폭 */
+.container { max-width: 1100px; }
+
+/* 아바타 크기/자르기 */
+.avatar { width: 64px; height: 64px; object-fit: cover; }
+.avatar.avatar-xl { width: 96px; height: 96px; }
+
+/* 사이드 메뉴 톤 업 */
+.list-group .list-group-item { border: 0; padding: 0.9rem 1rem; }
+.list-group .list-group-item.active {
+  background: #f8f9fa;
+  color: #0d6efd;
+  font-weight: 600;
+  border-left: 4px solid #0d6efd;
+}
