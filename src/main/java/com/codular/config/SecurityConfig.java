@@ -46,7 +46,9 @@ public class SecurityConfig {
                                 "/api/v1/auth/sign-in",
                                 "/api/v1/auth/sign-up",
                                 "/api/v1/auth/refresh",
-                                "/api/v1/auth/logout"))
+                                "/api/v1/auth/logout",
+                                "/api/v1/auth/password/forgot",
+                                "/api/v1/auth/password/reset"))
                 // cors
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth

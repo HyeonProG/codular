@@ -26,11 +26,16 @@ public class PasswordResetServiceImpl implements PasswordResetService {
     private final PasswordEncoder passwordEncoder;
     private final EmailSender emailSender;
     private final MailSenderUtil mailSenderUtil;
+    private final PasswordResetRateLimiter passwordResetRateLimiter;
 
     private static final Duration TOKEN_TTL = Duration.ofMinutes(5);
 
     @Override
     public void requestResetPassword(String email, String resetLinkBase) {
+        if (!passwordResetRateLimiter.allow(email)) {
+            return;
+        }
+
         Optional<User> optUser = userRepository.findByEmail(email);
         if (optUser.isEmpty()) return;
 

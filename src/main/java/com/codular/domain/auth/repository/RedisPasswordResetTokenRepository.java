@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RedisPasswordResetTokenRepository implements PasswordResetTokenRepository {
 
-    private StringRedisTemplate stringRedisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
     private String key(String email) {
         return "auth:pwreset:" + email;

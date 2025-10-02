@@ -89,7 +89,6 @@ public class AuthApiController {
         String resetLinkBase = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/auth/password/reset")
                 .toUriString();
-
         passwordResetService.requestResetPassword(passwordResetRequestDto.getEmail(), resetLinkBase);
         return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
     }
